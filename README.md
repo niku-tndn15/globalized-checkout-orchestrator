@@ -4,7 +4,9 @@ A fault-tolerant, distributed Node.js checkout backend designed to handle asynch
 
 This project demonstrates enterprise-level backend architecture, moving beyond basic CRUD operations to solve complex financial race conditions using **Finite State Machines (FSM)** and **Idempotency Keys**.
 
+
 -----------------------------------------
+
 
 ## 🧠 System Architecture
 
@@ -20,7 +22,7 @@ graph TD
         Tax --> StratTax[Strategy: GST / VAT / Sales Tax]
         FSM --> Orchestrator[Payment Orchestrator]
         Orchestrator --> StratPay[Strategy: Stripe / Razorpay]
-    End
+    end
     
     Orchestrator --> DB[(Idempotency Store)]
     
@@ -29,10 +31,13 @@ graph TD
     Auth --> IdempotencyGuard{Idempotency Guard}
     IdempotencyGuard -->|New Event| FSM_Update[Transition to COMPLETED]
     IdempotencyGuard -->|Duplicate| Block[Acknowledge 200 OK & Drop]
-	
+
+```
+
 ------------------------------------------------
 
-🛠️ Engineering Highlights
+
+## 🛠️ Engineering Highlights
 
 1. Finite State Machine (FSM)
 
@@ -56,8 +61,10 @@ Implementation: The orchestrator inspects the buyer's countryCode and dynamicall
 
 -------------------------------------------------
 
-📡 API Reference
+## 📡 API Reference
+
 POST /api/checkout
+
 Initiates the checkout pipeline, calculates regional taxes, converts currencies, and routes to the optimal payment gateway.
 
 Request Body:
@@ -86,7 +93,7 @@ Request Body:
 
 -----------------------------------------------------
 
-🚀 Getting Started (Local Development)
+## 🚀 Getting Started (Local Development)
 
 Prerequisites
 
